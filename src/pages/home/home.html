@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Ionic Menu Starter</h3>
+  <ion-list>
+    <ion-list-header>News Test</ion-list-header>
+    <div padding text-center>
+      <button ion-button (click)="loadAllNews()">Load All News</button>
+    </div>
+    <ion-list-header>Global Setting</ion-list-header>
+    <ion-item padding-bottom>
+      <ion-label>Auto show when ready</ion-label>
+      <ion-checkbox [(ngModel)]="adAutoShow"></ion-checkbox>
+    </ion-item>
+    <ion-list-header>Banner</ion-list-header>
+    <ion-item>
+      <ion-label>Banner Size</ion-label>
+      <ion-select [(ngModel)]="bannerSize">
+        <ion-option  *ngFor="let key of keys" value="{{bannerSizeOpts[key]}}">{{key}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item padding-bottom>
+      <ion-label>Banner At Top</ion-label>
+      <ion-checkbox [(ngModel)]="bannerAtTop"></ion-checkbox>
+    </ion-item>
+    <!-- Temporarily disabled as it may have bug need to be fixed -->
+    <!--<ion-item padding-bottom>
+      <ion-label>Overlap Webview</ion-label>
+      <ion-checkbox [(ngModel)]="bannerOverlap"></ion-checkbox>
+    </ion-item>-->
+    <div padding text-center>
+      <button *ngIf="!adAutoShow" ion-button (click)="prepareBanner()">Prepare Banner</button>
+      <button ion-button (click)="showBanner()">Show Banner</button>
+      <button ion-button (click)="hideBanner()">Hide Banner</button>
+      <button ion-button (click)="removeBanner()">Remove Banner</button>
+    </div>
+    <ion-list-header>Interstitial</ion-list-header>
+    <div padding text-center>
+      <button *ngIf="!adAutoShow" ion-button (click)="prepareInterstitial()">Prepare Interstitial</button>
+      <button ion-button (click)="showInterstitial()">Show Interstitial</button>
+    </div>
+  </ion-list>
+</ion-content>
+
+<ion-footer no-border >
+  <ion-toolbar>
+
+  </ion-toolbar>
+</ion-footer>

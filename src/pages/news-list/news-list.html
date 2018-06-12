@@ -1,0 +1,37 @@
+<!--
+  Generated template for the NewsListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ currentCategory.Name }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="news-list-content">
+    <ion-refresher (ionRefresh)="doRefresh($event)" [snapbackDuration]="2000" [closeDuration]="2000">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-list [virtualScroll]="currentCategory.NewsList" [headerFn]="dateHeaderFn" [approxItemHeight]="'100px'">
+      <ion-list-header *virtualHeader="let header">
+        {{ header | titlecase}}
+      </ion-list-header>
+      <button ion-item detail-none *virtualItem="let item" class="news-list-item" (click)="onNewsClick(item)">
+        <ion-thumbnail item-start class="news-list-thumb">
+          <div [ngStyle]="{ 'background-image' : 'url( ' 
+          + ( item.Category == 'twitter'? 'assets/imgs/img_twitter.png' : item.ThumbImage ? item.ThumbImage : 'assets/imgs/img_noimage.png' ) 
+          + ')' }"></div>
+        </ion-thumbnail>
+        <p class="item-date">h. {{ item.Date | date: ' HH:mm':'':'it' | titlecase }}</p>
+        <p class="item-title">{{item.Title| limitText : 70 : '...'}}</p>
+        <p class="item-category">By: {{item.Category}}</p>
+      </button>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="loadMoreNews($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Recupero altre notizie...">></ion-infinite-scroll-content>
+      </ion-infinite-scroll>     
+</ion-content>
